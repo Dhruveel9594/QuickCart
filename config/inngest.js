@@ -1,4 +1,5 @@
 import { Inngest } from "inngest";
+import User from "@/models/User";
 import connectDb from "./db";
 
 // Create a client to send and receive events
@@ -11,11 +12,11 @@ export const syncUserCreation = inngest.createFunction(
     {
         event: 'clerk/user.created'
     },
-    async (event) => {
-        const  { id, first_name, last_name, email_addressess,image_url} = event.data
+    async ({event}) => {
+        const  { id, first_name, last_name, email_addresses,image_url} = event.data
         const userData = {
             _id:id,
-            email: email_addressess[0].email_address,
+            email: email_addresses[0].email_address,
             name: first_name + ' ' + last_name,
             imageUrl: image_url
         }
@@ -32,11 +33,11 @@ export const syncUserUpdation = inngest.createFunction(
         id: 'update-suer-from-clerk'
     },
     { event: 'clerk/user.updated'},
-    async (event) => {
-        const  { id, first_name, last_name, email_addressess,image_url} = event.data
+    async ({event}) => {
+        const  { id, first_name, last_name, email_addresses,image_url} = event.data
         const userData = {
             _id:id,
-            email: email_addressess[0].email_address,
+            email: email_addresses[0].email_address,
             name: first_name + ' ' + last_name,
             imageUrl: image_url
         }
