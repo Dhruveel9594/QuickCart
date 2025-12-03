@@ -1,6 +1,6 @@
 import { Inngest } from "inngest";
 import connectDb from "./db";
-import User from "./models/user";  // ← Fixed: lowercase 'user'
+import User from "@/models/User";
 
 // Initialize Inngest client
 export const inngest = new Inngest({ id: "quickcart-next" });
